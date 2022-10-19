@@ -16,16 +16,17 @@ export default function LoginPage() {
         e.preventDefault();
 
         const body = { email, password };
-        console.log(body)
 
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
-        promise.then((res) => {
-            console.log(res.data);
+       
+        promise.then((res) => {        
+            const dataUser = res.data;
+            console.log(dataUser)        
             navigate(`/hoje`);
         })
+
         promise.catch((err) => {
-            console.log(err.response.data)
-            //alert(err.response.data);
+            alert(err.response.data);
         })
     }
 
@@ -54,7 +55,7 @@ export default function LoginPage() {
                 <button type="submit">Entrar</button>
             </form>
 
-            <Link to="/cadastro">
+            <Link to="/cadastro" style={{ textDecoration: 'none' }}>
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
 
@@ -71,7 +72,7 @@ p {
     font-family: 'Lexend Deca', sans-serif;
     color: #52B6FF;
     font-size: 14px; 
-    margin-top: 8px;
+    margin-top: 18px;
 }    
 form {
     display: flex;

@@ -1,5 +1,5 @@
 import React from "react";
-import { GlobalStyle } from "../src/styles/GlobalStyle";
+import { GlobalStyle } from "../src/assets/styles/GlobalStyle";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
@@ -9,6 +9,7 @@ import HistoryPage from "./pages/HistoryPage";
 
 
 export default function App() {
+
   return (
     <BrowserRouter>
       <GlobalStyle />

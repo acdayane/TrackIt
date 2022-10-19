@@ -29,7 +29,7 @@ export default function RegistrationPage() {
             navigate(`/hoje`);
         })
         promise.catch((err) => {
-            alert(err.response.data);
+            console.log(err.response.data);
         })
     }
 
@@ -75,7 +75,7 @@ export default function RegistrationPage() {
                 <button type="submit">Cadastrar</button>
             </form>
 
-            <Link to="/">
+            <Link to="/" style={{ textDecoration: 'none' }}>
                 <p>Já tem uma conta? Faça login!</p>
             </Link>
 
@@ -92,7 +92,7 @@ p {
     font-family: 'Lexend Deca', sans-serif;
     color: #52B6FF;
     font-size: 14px; 
-    margin-top: 8px;
+    margin-top: 18px;
 }    
 form {
     display: flex;
