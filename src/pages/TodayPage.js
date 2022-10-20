@@ -10,7 +10,7 @@ export default function TodayPage() {
         <Container>
             <Header />
             <Main>
-                <h1>....</h1>
+                <h1>Vamos criar um novo hábito?</h1>
                 <h2>Nenhum hábito concluído ainda</h2>
                 <BoxHabits>
                     <Habit>
@@ -39,7 +39,7 @@ const Main = styled.div`
     width: 90%;
     font-family: 'Lexend Deca', sans-serif;
 h1 {    
-    margin-top: 100px;
+    margin-top: 115px;
     color: #126BA5;
     font-size: 23px;    
 }
