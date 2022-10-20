@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -5,6 +6,7 @@ import Footer from "../components/Footer";
 
 export default function TodayPage() {
 
+    const [habitCreated, setHabitCreated] = useState(null)
 
     return (
         <Container>
@@ -12,16 +14,20 @@ export default function TodayPage() {
             <Main>
                 <h1>Vamos criar um novo hábito?</h1>
                 <h2>Nenhum hábito concluído ainda</h2>
-                <BoxHabits>
-                    <Habit>
-                        <HabitText>
-                            <h3>oioioio</h3>
-                            <p>paragrafo</p>
-                            <p>paragrafo</p>
-                        </HabitText>
-                        <ion-icon name="checkbox"></ion-icon>
-                    </Habit>
-                </BoxHabits>
+
+                {habitCreated !== null &&
+                    <BoxHabits>
+                        <Habit>
+                            <HabitText>
+                                <h3>oioioio</h3>
+                                <p>paragrafo</p>
+                                <p>paragrafo</p>
+                            </HabitText>
+                            <ion-icon name="checkbox"></ion-icon>
+                        </Habit>
+                    </BoxHabits>
+                }
+                
             </Main>
             <Footer />
         </Container>
@@ -44,7 +50,7 @@ h1 {
     font-size: 23px;    
 }
 h2 {
-    margin-top: 5px;
+    margin-top: 10px;
     margin-bottom: 10px;
     color: #BABABA;
     font-size: 18px;
@@ -56,7 +62,7 @@ const BoxHabits = styled.div`
     align-items: center;
 `
 const Habit = styled.div`
-    margin-top: 10px;
+    margin-top: 15px;
     background-color: #FFFFFF;
     height: 94px;
     width: 100%;
