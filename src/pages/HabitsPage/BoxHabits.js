@@ -1,21 +1,40 @@
 import styled from "styled-components";
 import { useState } from "react";
+import axios from "axios";
+import ButtonWeekday from "../HabitsPage/ButtonWeekday"
 
 
-export default function BoxHabits() {
+export default function BoxHabits({setHabitCreated}) {
 
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S", "D"];
     const [input, setInput] = useState("");
-    const [disable, setDisable] = useState(false)
+    const [daysSelected, setDaysSelected] = useState([]);
 
     function saveHabit(e) {
-        e.preventDefault();     
-          
-    }
+        e.preventDefault(); 
 
-    function selectDay(d, i) {
-        setDisable(!disable);                    
-    }
+        // if (daysSelected === []){
+        //     return
+        // }        
+        
+        const body = { name: input, days: daysSelected };
+        console.log(body)
+        
+        // const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body);
+       
+        // promise.then((res) => {        
+        //     console.log(res.data);            
+        // })
+ 
+        // promise.catch((err) => {
+        //     alert(err.response.data);
+        // })          
+    }   
+
+    function cancelHabit() {
+        setInput("");
+        setHabitCreated(false);        
+    }    
     
     return (
         <Container>
@@ -30,12 +49,18 @@ export default function BoxHabits() {
                         required
                     />
                     <BoxWeekdays>
-                        {weekdays.map((d, i) => (                            
-                            <button disabled={disable} key={i} onClick={() => selectDay({d, i})}>{d}</button>                      
-                        ))}
+                        {weekdays.map((d, i) => (  
+                        <ButtonWeekday
+                            key={i}
+                            index={i}
+                            day={d}
+                            daysSelected={daysSelected}
+                            setDaysSelected={setDaysSelected}
+                        />
+                    ))}
                     </BoxWeekdays>
                     <Buttons>
-                        <button>Cancelar</button>
+                        <button onClick={cancelHabit}>Cancelar</button>
                         <button type="submit">Salvar</button>
                     </Buttons>
                 </Form>
@@ -105,16 +130,4 @@ const BoxWeekdays = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-button {
-    margin: 10px 0;
-    border: 1px solid #D4D4D4; 
-    border-radius: 5px; 
-    background: #FFFFFF;
-    color: #D4D4D4;
-    width: 30px;
-    height: 30px;
-    font-family:'Lexend Deca', sans-serif;
-    font-size: 20px;
-    cursor: pointer;
-}
 `

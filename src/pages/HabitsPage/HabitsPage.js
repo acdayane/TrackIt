@@ -7,10 +7,10 @@ import { useState } from "react";
 
 export default function HabitsPage() {
    
-    const [habitCreated, setHabitCreated] = useState(null)
+    const [habitCreated, setHabitCreated] = useState(false)
 
     function createHabit() {
-        setHabitCreated("creating")
+        setHabitCreated(true)
     }
 
     return (
@@ -24,8 +24,10 @@ export default function HabitsPage() {
                         <button onClick={createHabit}>+</button>
                     </TextTitle>
 
-                    {habitCreated !== null &&
-                        <BoxHabits />
+                    {habitCreated === true &&
+                        <BoxHabits
+                            setHabitCreated={setHabitCreated}
+                        />
                     }
 
                     <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>

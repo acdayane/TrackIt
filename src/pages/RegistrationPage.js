@@ -21,8 +21,7 @@ export default function RegistrationPage() {
         e.preventDefault();
 
         const body = { email, password, name, image };
-        //console.log(body)
-
+        
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
         promise.then((res) => {
             console.log(res.data);
@@ -43,7 +42,6 @@ export default function RegistrationPage() {
                 <input
                     type="email"
                     placeholder="e-mail"
-                    id="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
@@ -51,7 +49,6 @@ export default function RegistrationPage() {
                 <input
                     type="password"
                     placeholder="senha"
-                    id="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     required
@@ -59,7 +56,6 @@ export default function RegistrationPage() {
                 <input
                     type="text"
                     placeholder="nome"
-                    id="name"
                     value={name}
                     onChange={e => setName(e.target.value)}
                     required
@@ -67,7 +63,6 @@ export default function RegistrationPage() {
                 <input
                     type="URL"
                     placeholder="foto"
-                    id="image"
                     value={image}
                     onChange={e => setImage(e.target.value)}
                     required
