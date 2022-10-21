@@ -8,7 +8,7 @@ export default function BoxHabits() {
     const [input, setInput] = useState("");
     const [disable, setDisable] = useState(false)
 
-    function sendHabit(e) {
+    function saveHabit(e) {
         e.preventDefault();     
           
     }
@@ -20,7 +20,7 @@ export default function BoxHabits() {
     return (
         <Container>
             <Habit>
-                <Form onSubmit={sendHabit}>
+                <Form onSubmit={saveHabit}>
                     <input
                         type="text"
                         name="habit"
@@ -72,7 +72,7 @@ input {
     background: #FFFFFF;
     color: #666666;
     font-family:'Lexend Deca', sans-serif;
-    font-size: 20px;
+    font-size: 19px;
 }
 `
 const Buttons = styled.div`

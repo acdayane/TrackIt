@@ -1,13 +1,16 @@
 import styled from "styled-components"
+import { useDataUser } from "../context/DataUser"
 
 
 export default function Header() {
 
+    const {dataUser} = useDataUser();
 
     return (
+        
         <ContainerHeader>
             <h1>TrackIt</h1>
-            <img src="" alt="foto do perfil"/>
+            <img src={dataUser} alt="foto"/>
         </ContainerHeader>
        
     )

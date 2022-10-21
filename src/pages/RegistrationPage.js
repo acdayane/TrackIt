@@ -93,6 +93,7 @@ p {
     color: #52B6FF;
     font-size: 14px; 
     margin-top: 18px;
+    text-decoration-line: underline;
 }    
 form {
     display: flex;
@@ -105,6 +106,9 @@ input {
     width: 303px;
     height: 45px;
     margin-top: 8px;
+    color: #666666;
+    font-family:'Lexend Deca', sans-serif;
+    font-size: 18px;
 }
 input::placeholder {
     font-family: 'Lexend Deca', sans-serif;

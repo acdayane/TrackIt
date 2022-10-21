@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useDataUser } from "../context/DataUser";
 
 export default function LoginPage() {
 
+    const {setDataUser} = useDataUser();   
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -16,15 +17,13 @@ export default function LoginPage() {
         e.preventDefault();
 
         const body = { email, password };
-
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
        
         promise.then((res) => {        
-            const dataUser = res.data;
-            console.log(dataUser)        
+            setDataUser(res.data.image);              
             navigate(`/hoje`);
         })
-
+ 
         promise.catch((err) => {
             alert(err.response.data);
         })
@@ -33,7 +32,7 @@ export default function LoginPage() {
     return (
         <Container>
 
-            <img src={logo} alt={logo} />
+            <img src={logo} alt="logo" />
 
             <form onSubmit={sendLogin}>
                 <input
@@ -73,6 +72,7 @@ p {
     color: #52B6FF;
     font-size: 14px; 
     margin-top: 18px;
+    text-decoration-line: underline;
 }    
 form {
     display: flex;
@@ -85,6 +85,9 @@ input {
     width: 303px;
     height: 45px;
     margin-top: 8px;
+    color: #666666;
+    font-family:'Lexend Deca', sans-serif;
+    font-size: 18px;
 }
 input::placeholder {
     font-family: 'Lexend Deca', sans-serif;
