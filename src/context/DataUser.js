@@ -5,11 +5,12 @@ const DataContext = createContext(); //inicializa
 
 export default function DataProvider({children}){  //provê para os filhos
 
-    const [dataUser, setDataUser] = useState(null);
+    const [userPhoto, setUserPhoto] = useState(null);
+    const [token, setToken] = useState(null);
 
     // encaminha o valor
     return (
-        <DataContext.Provider value={{dataUser, setDataUser}}> 
+        <DataContext.Provider value={{userPhoto, setUserPhoto, token, setToken}}> 
             {children}
         </DataContext.Provider>
     )
@@ -18,9 +19,9 @@ export default function DataProvider({children}){  //provê para os filhos
 export function useDataUser() { //desestrutura para usar o valor
 
     const context = useContext(DataContext);
-    const {dataUser, setDataUser} = context;
+    const {userPhoto, setUserPhoto, token, setToken} = context;
 
     return (
-        {dataUser, setDataUser}
+        {userPhoto, setUserPhoto, token, setToken}
     )
 }

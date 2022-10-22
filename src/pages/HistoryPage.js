@@ -36,7 +36,7 @@ h1 {
 h2 {
     margin-top: 15px;
     margin-bottom: 10px;
-    color: #BABABA;
+    color: #666666;
     font-size: 18px;
 }
 `

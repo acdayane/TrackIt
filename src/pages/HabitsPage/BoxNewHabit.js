@@ -1,44 +1,47 @@
 import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
-import ButtonWeekday from "../HabitsPage/ButtonWeekday"
+import ButtonWeekday from "./ButtonWeekday"
+import { useDataUser } from "../../context/DataUser";
 
 
-export default function BoxHabits({setHabitCreated}) {
+export default function BoxNewHabit({ setCreatingHabit, setNoHabit }) {
 
-    const weekdays = ["D", "S", "T", "Q", "Q", "S", "S", "D"];
+    const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [input, setInput] = useState("");
     const [daysSelected, setDaysSelected] = useState([]);
+    const { token } = useDataUser();
 
     function saveHabit(e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
-        // if (daysSelected === []){
-        //     return
-        // }        
-        
         const body = { name: input, days: daysSelected };
-        console.log(body)
-        
-        // const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body);
-       
-        // promise.then((res) => {        
-        //     console.log(res.data);            
-        // })
- 
-        // promise.catch((err) => {
-        //     alert(err.response.data);
-        // })          
-    }   
+        const config = {
+            headers: { Authorization: `Bearer ${token}`}
+        }
+
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
+
+        promise.then((res) => {        
+            console.log(res.data); 
+            setInput("");
+            setCreatingHabit(false); 
+            setNoHabit(false);          
+        })
+
+        promise.catch((err) => {
+            alert(err.response.data);
+        })          
+    }
 
     function cancelHabit() {
         setInput("");
-        setHabitCreated(false);        
-    }    
-    
+        setCreatingHabit(false);
+    }
+
     return (
         <Container>
-            <Habit>
+            <NewHabit>
                 <Form onSubmit={saveHabit}>
                     <input
                         type="text"
@@ -49,22 +52,22 @@ export default function BoxHabits({setHabitCreated}) {
                         required
                     />
                     <BoxWeekdays>
-                        {weekdays.map((d, i) => (  
-                        <ButtonWeekday
-                            key={i}
-                            index={i}
-                            day={d}
-                            daysSelected={daysSelected}
-                            setDaysSelected={setDaysSelected}
-                        />
-                    ))}
+                        {weekdays.map((d, i) => (
+                            <ButtonWeekday
+                                key={i}
+                                index={i}
+                                day={d}
+                                daysSelected={daysSelected}
+                                setDaysSelected={setDaysSelected}
+                            />
+                        ))}
                     </BoxWeekdays>
                     <Buttons>
                         <button onClick={cancelHabit}>Cancelar</button>
                         <button type="submit">Salvar</button>
                     </Buttons>
                 </Form>
-            </Habit>
+            </NewHabit>
         </Container>
     )
 }
@@ -75,7 +78,7 @@ const Container = styled.div`
     align-items: center;
     margin-top: 15px;
 `
-const Habit = styled.div`
+const NewHabit = styled.div`
     margin: 10px 0;
     background-color: #FFFFFF;
     height: 180px;

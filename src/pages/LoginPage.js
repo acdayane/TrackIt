@@ -7,7 +7,7 @@ import { useDataUser } from "../context/DataUser";
 
 export default function LoginPage() {
 
-    const {setDataUser} = useDataUser();   
+    const {setUserPhoto, setToken} = useDataUser();   
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -20,7 +20,8 @@ export default function LoginPage() {
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
        
         promise.then((res) => {        
-            setDataUser(res.data.image);              
+            setUserPhoto(res.data.image);   
+            setToken(res.data.token);           
             navigate(`/hoje`);
         })
  

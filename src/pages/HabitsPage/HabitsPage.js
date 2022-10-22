@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import BoxHabits from "./BoxHabits";
+import BoxNewHabit from "./BoxNewHabit";
+import CreatedHabit from "./CreatedHabit";
 import { useState } from "react";
 
 
 export default function HabitsPage() {
-   
-    const [habitCreated, setHabitCreated] = useState(false)
+
+    const [creatingHabit, setCreatingHabit] = useState(false)
+    const [noHabit, setNoHabit] = useState(true)
 
     function createHabit() {
-        setHabitCreated(true)
+        setCreatingHabit(true)
     }
 
     return (
@@ -24,14 +26,19 @@ export default function HabitsPage() {
                         <button onClick={createHabit}>+</button>
                     </TextTitle>
 
-                    {habitCreated === true &&
-                        <BoxHabits
-                            setHabitCreated={setHabitCreated}
+                    {creatingHabit === true &&
+                        <BoxNewHabit
+                            setCreatingHabit={setCreatingHabit}
+                            setNoHabit={setNoHabit}
                         />
                     }
-
+                    {noHabit === true ?
+                    (
                     <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
-
+                    ) : (
+                        <CreatedHabit/>
+                    )
+                    }
                 </BoxTitle>
             </Main>
             <Footer />

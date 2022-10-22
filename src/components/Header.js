@@ -1,16 +1,18 @@
 import styled from "styled-components"
 import { useDataUser } from "../context/DataUser"
+import { useNavigate } from "react-router-dom";
 
 
 export default function Header() {
 
-    const {dataUser} = useDataUser();
+    const {userPhoto} = useDataUser();
+    const navigate = useNavigate();
 
     return (
         
         <ContainerHeader>
-            <h1>TrackIt</h1>
-            <img src={dataUser} alt="foto"/>
+            <h1 onClick={() => navigate(`/`)}>TrackIt</h1>
+            <img src={userPhoto} alt="foto"/>
         </ContainerHeader>
        
     )
