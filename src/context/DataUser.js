@@ -1,27 +1,27 @@
 import React from "react";
 import { createContext, useContext, useState } from "react";
 
-const DataContext = createContext(); //inicializa 
+const DataContext = createContext(); 
 
-export default function DataProvider({children}){  //provê para os filhos
+export default function DataProvider({children}){ 
 
     const [userPhoto, setUserPhoto] = useState(null);
     const [token, setToken] = useState(null);
+    const [habitsSaved, setHabitsSaved] = useState(null);
 
-    // encaminha o valor
     return (
-        <DataContext.Provider value={{userPhoto, setUserPhoto, token, setToken}}> 
+        <DataContext.Provider value={{userPhoto, setUserPhoto, token, setToken, habitsSaved, setHabitsSaved}}> 
             {children}
         </DataContext.Provider>
     )
 }
 
-export function useDataUser() { //desestrutura para usar o valor
+export function useDataUser() { 
 
     const context = useContext(DataContext);
-    const {userPhoto, setUserPhoto, token, setToken} = context;
+    const {userPhoto, setUserPhoto, token, setToken, habitsSaved, setHabitsSaved} = context;
 
     return (
-        {userPhoto, setUserPhoto, token, setToken}
+        {userPhoto, setUserPhoto, token, setToken, habitsSaved, setHabitsSaved}
     )
 }

@@ -21,13 +21,14 @@ export default function HistoryPage() {
 const Container = styled.div`
     background-color: #E5E5E5;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
 `
 const Main = styled.div`    
     width: 90%;
     font-family: 'Lexend Deca', sans-serif;
+    margin-bottom: 130px;
 h1 {    
     margin-top: 115px;
     color: #126BA5;

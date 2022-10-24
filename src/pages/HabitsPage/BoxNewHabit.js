@@ -1,48 +1,56 @@
 import styled from "styled-components";
-import { useState } from "react";
 import axios from "axios";
 import ButtonWeekday from "./ButtonWeekday"
 import { useDataUser } from "../../context/DataUser";
+import { useState } from "react";
 
 
-export default function BoxNewHabit({ setCreatingHabit, setNoHabit }) {
+export default function BoxNewHabit({ setCreatingHabit }) {
 
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
+    const { token, setHabitsSaved } = useDataUser();
     const [input, setInput] = useState("");
     const [daysSelected, setDaysSelected] = useState([]);
-    const { token } = useDataUser();
 
-    function saveHabit(e) {
-        e.preventDefault();
+    function saveHabit() {
 
         const body = { name: input, days: daysSelected };
         const config = {
-            headers: { Authorization: `Bearer ${token}`}
-        }
-
+            headers: { Authorization: `Bearer ${token}` }
+        };
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
 
-        promise.then((res) => {        
-            console.log(res.data); 
+        promise.then((res) => {
             setInput("");
-            setCreatingHabit(false); 
-            setNoHabit(false);          
+            setCreatingHabit(false);
+
+            const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            const promise = axios.get(URL, config);
+
+            promise.then((res) => {
+                setHabitsSaved(res.data);
+            });
+            promise.catch((err) => {
+                alert("Ops! Algo deu errado...", err.response.data);
+            });
+        })
+        promise.catch((err) => {
+            alert("Ops! Algo deu errado...", err.response.data);
         })
 
-        promise.catch((err) => {
-            alert(err.response.data);
-        })          
     }
 
     function cancelHabit() {
-        setInput("");
         setCreatingHabit(false);
     }
 
     return (
         <Container>
             <NewHabit>
-                <Form onSubmit={saveHabit}>
+                <Form onSubmit={(e) => e.preventDefault()}>
                     <input
                         type="text"
                         name="habit"
@@ -64,7 +72,7 @@ export default function BoxNewHabit({ setCreatingHabit, setNoHabit }) {
                     </BoxWeekdays>
                     <Buttons>
                         <button onClick={cancelHabit}>Cancelar</button>
-                        <button type="submit">Salvar</button>
+                        <button onClick={saveHabit}>Salvar</button>
                     </Buttons>
                 </Form>
             </NewHabit>
