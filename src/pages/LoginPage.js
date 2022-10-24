@@ -26,7 +26,7 @@ export default function LoginPage() {
         })
  
         promise.catch((err) => {
-            alert(err.response.data);
+            alert("Ops! Algo deu errado...", err.response.data);
         })
     }
 

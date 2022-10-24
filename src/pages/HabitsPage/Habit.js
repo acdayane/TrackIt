@@ -3,9 +3,10 @@ import { useDataUser } from "../../context/DataUser";
 import axios from "axios";
 
 
-export default function Habit({ id, name }) {
+export default function Habit({ id, name, days }) {
 
     const { token, setHabitsSaved } = useDataUser();
+    const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];   
 
     function deleteHabit(id) {
 
@@ -19,7 +20,6 @@ export default function Habit({ id, name }) {
 
             promise.then((res) => {
                 alert("Hábito excluído da lista");
-                //console.log("delete", res.data)
 
                 URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
                 const promise = axios.get(URL, config);
@@ -42,11 +42,17 @@ export default function Habit({ id, name }) {
     return (
         <Container>
             <BoxHabit>
-                <BoxTitle>
-                    <h1>{name}</h1>
+                <Title>
+                    <h3>{name}</h3>
                     <ion-icon onClick={() => deleteHabit(id)} name="trash-outline"></ion-icon>
-                </BoxTitle>
-                <Weekday>"batata"</Weekday>
+                </Title>
+                <Weekday >
+                    {days.map((d, i) =>
+                        <button key={i}>
+                            {weekdays[d]}
+                        </button>
+                    )}
+                </Weekday>
             </BoxHabit>
         </Container>
     )
@@ -63,14 +69,14 @@ const BoxHabit = styled.div`
     background-color: #FFFFFF;
     height: 91px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 5px;    
 `
-const BoxTitle = styled.div`
+const Title = styled.div`
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-h1 {
+h3 {
     color: #666666;
     font-family:'Lexend Deca', sans-serif;
     font-size: 19px;
@@ -81,12 +87,14 @@ ion-icon {
 }   
 `
 const Weekday = styled.div`
+    display: flex;
+    padding: 10px;
 button {
-    margin: 10px 0;
+    margin: 2px;
     border: 1px solid #D4D4D4; 
     border-radius: 5px; 
-    background: ${props => props.isSelected === true ? "#D4D4D4" : "#FFFFFF"};
-    color: ${props => props.isSelected === true ? "#FFFFFF" : "#D4D4D4"};
+    background-color: #D4D4D4;
+    color: #FFFFFF;
     width: 30px;
     height: 30px;
     font-family:'Lexend Deca', sans-serif;

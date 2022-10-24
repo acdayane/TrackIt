@@ -37,7 +37,7 @@ button {
     margin: 10px 0;
     border: 1px solid #D4D4D4; 
     border-radius: 5px; 
-    background: ${props => props.isSelected === true ? "#D4D4D4" : "#FFFFFF"};
+    background-color: ${props => props.isSelected === true ? "#D4D4D4" : "#FFFFFF"};
     color: ${props => props.isSelected === true ? "#FFFFFF" : "#D4D4D4"};
     width: 30px;
     height: 30px;

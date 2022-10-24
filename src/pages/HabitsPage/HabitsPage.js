@@ -61,10 +61,14 @@ export default function HabitsPage() {
                             <h2>Você não tem hábitos cadastrados. Adicione um hábito para começar a trackear!</h2>
                         ) : (
                             <HabitsContainer>
-
-                                {habitsSaved.map((h, i) => (
-                                    <Habit id={h.id} name={h.name}/>
-                                ))}
+                                {habitsSaved.map((h, i) =>
+                                    <Habit
+                                        key={i}
+                                        id={h.id}
+                                        name={h.name}
+                                        days={h.days}
+                                    />
+                                )}
                             </HabitsContainer>
                         )}
                     </BoxTitle>
@@ -114,6 +118,7 @@ const TextTitle = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
 button {
     border: 1px solid #52B6FF;
     border-radius: 5px;

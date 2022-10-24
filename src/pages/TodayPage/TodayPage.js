@@ -50,11 +50,12 @@ export default function TodayPage() {
                 {todayList === [] ? (
                     <BoxHabits>
                         <h1>Vamos criar um novo hábito?</h1>
-                        <h2>Nenhum hábito concluído ainda</h2>
+                        <h2>Nenhum hábito cadastrado ainda</h2>
                     </BoxHabits>
                 ) : (
                     <BoxHabits>
                         <h1>{todaysDate}</h1>
+                        <h2>Nenhum hábito concluído ainda</h2>
                         {todayList.map((h, i) => (
                             <HabitToday                      
                                 key={i}

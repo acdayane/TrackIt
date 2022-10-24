@@ -8,13 +8,11 @@ import logo from "../assets/logo.png";
 
 export default function RegistrationPage() {
 
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [image, setImage] = useState("");    
     const navigate = useNavigate();
-
 
     function sendRegistration(e) {
 
@@ -24,11 +22,11 @@ export default function RegistrationPage() {
         
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
         promise.then((res) => {
-            console.log(res.data);
-            navigate(`/hoje`);
+            //console.log(res.data);
+            navigate(`/`);
         })
         promise.catch((err) => {
-            console.log(err.response.data);
+            alert("Ops! Algo deu errado...", err.response.data);
         })
     }
 
