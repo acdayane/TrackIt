@@ -28,7 +28,7 @@ export default function TodayPage() {
 
         promise.then((res) => {
             setTodayList(res.data);
-            console.log('todayList', todayList)
+            //console.log('todayList', todayList)
         });
         promise.catch((err) => {
             alert("Ops! Algo deu errado...", err.response.data);

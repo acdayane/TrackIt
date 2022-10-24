@@ -23,15 +23,15 @@ export default function HabitsPage() {
         }
         const promise = axios.get(URL, config);
 
-        promise.then((res) => {            
-            setHabitsSaved(res.data);          
+        promise.then((res) => {
+            setHabitsSaved(res.data);
         });
         promise.catch((err) => {
             alert("Ops! Algo deu errado...", err.response.data);
         });
     }, [])
 
-    console.log("habitsSaved", habitsSaved)
+    //console.log("habitsSaved", habitsSaved)
 
     if (habitsSaved === null) {
         return (
@@ -40,42 +40,39 @@ export default function HabitsPage() {
             </Loading>
         )
     }
+    else {
+        return (
 
-    return (
-        <Container>
-            <Header />
-            <Main>
-                <BoxTitle>
-                    <TextTitle>
-                        <h1>Meus hábitos</h1>
-                        <button onClick={createHabit}>+</button>
-                    </TextTitle>
+            <Container>
+                <Header />
+                <Main>
+                    <BoxTitle>
+                        <TextTitle>
+                            <h1>Meus hábitos</h1>
+                            <button onClick={createHabit}>+</button>
+                        </TextTitle>
 
-                    {creatingHabit === true &&
-                        <BoxNewHabit
-                            setCreatingHabit={setCreatingHabit}
-                        />
-                    }
-                    {habitsSaved === [] ? (
-                        <h2>Você não tem hábitos cadastrados. Adicione um hábito para começar a trackear!</h2>
-                    ) : (
-                        <HabitsContainer>
-                            
-                            {habitsSaved.map((h, i) => (
-                                <Habit
-                                    key={i}
-                                    id={h.id}
-                                    name={h.name}
-                               
-                                />
-                            ))}
-                        </HabitsContainer>
-                    )}
-                </BoxTitle>
-            </Main>
-            <Footer />
-        </Container>
-    )
+                        {creatingHabit === true &&
+                            <BoxNewHabit
+                                setCreatingHabit={setCreatingHabit}
+                            />
+                        }
+                        {habitsSaved === [] ? (
+                            <h2>Você não tem hábitos cadastrados. Adicione um hábito para começar a trackear!</h2>
+                        ) : (
+                            <HabitsContainer>
+
+                                {habitsSaved.map((h, i) => (
+                                    <Habit id={h.id} name={h.name}/>
+                                ))}
+                            </HabitsContainer>
+                        )}
+                    </BoxTitle>
+                </Main>
+                <Footer />
+            </Container>
+        )
+    }
 }
 
 const Loading = styled.div`

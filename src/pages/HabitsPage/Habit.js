@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Habit({ id, name }) {
 
-    const { token } = useDataUser();
+    const { token, setHabitsSaved } = useDataUser();
 
     function deleteHabit(id) {
 
@@ -19,39 +19,37 @@ export default function Habit({ id, name }) {
 
             promise.then((res) => {
                 alert("Hábito excluído da lista");
-                console.log("delete", res.data)
+                //console.log("delete", res.data)
 
-                // URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-                // const promise = axios.get(URL, config);
+                URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+                const promise = axios.get(URL, config);
 
-                // promise.then((res) => {
-                //     setHabitsSaved(res.data);
-                //     console.log(habitsSaved);
-                // });
-                // promise.catch((err) => {
-                //     alert("Ops! Algo deu errado...", err.response.data);
-                // })
+                promise.then((res) => {
+                    setHabitsSaved(res.data);
+                    //console.log(habitsSaved);
+                });
+                promise.catch((err) => {
+                    alert("Ops! Algo deu errado...", err.response.data);
+                })
 
             });
             promise.catch((err) => {
                 alert("Ops! Algo deu errado...", err.response.data);
             });
-
-            //}
-
-            return (
-                <Container>
-                    <BoxHabit>
-                        <BoxTitle>
-                            <h1>{name}</h1>
-                            <ion-icon onClick={() => deleteHabit(id)} name="trash-outline"></ion-icon>
-                        </BoxTitle>
-                        <Weekday><button>"batata"</button></Weekday>
-                    </BoxHabit>
-                </Container>
-            )
         }
     }
+
+    return (
+        <Container>
+            <BoxHabit>
+                <BoxTitle>
+                    <h1>{name}</h1>
+                    <ion-icon onClick={() => deleteHabit(id)} name="trash-outline"></ion-icon>
+                </BoxTitle>
+                <Weekday>"batata"</Weekday>
+            </BoxHabit>
+        </Container>
+    )
 }
 
 const Container = styled.div`

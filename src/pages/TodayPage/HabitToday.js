@@ -8,19 +8,19 @@ export default function HabitToday({ id, name, done, currentSequence, highestSeq
     const { token } = useDataUser();
     const [clicked, setClicked] = useState(false);
 
-    useEffect(() => {
-        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        }
-        const promise = axios.get(URL, config);
-        promise.then((res) => {
-            console.log(res.data);
-        });
-        promise.catch((err) => {
-            alert("Ops! Algo deu errado...", err.response.data);
-        });
-    }, [])
+    // useEffect(() => {
+    //     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+    //     const config = {
+    //         headers: { Authorization: `Bearer ${token}` }
+    //     }
+    //     const promise = axios.get(URL, config);
+    //     promise.then((res) => {
+    //         //console.log(res.data);
+    //     });
+    //     promise.catch((err) => {
+    //         alert("Ops! Algo deu errado...", err.response.data);
+    //     });
+    // }, [])
 
     function checkHabit(id) {
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/" + id + "/check";
@@ -64,7 +64,8 @@ ion-icon {
     width: 69px;
     height: 69px;
     margin-right: 10px;
-    background-color: {${props => props.isClicked === true ? "#8FC549" : "#BABABA"};}
+    color: #BABABA; 
+    /* {${props => props.isClicked === true ? "#8FC549" : "#BABABA"};} */
     cursor: pointer;
 }
 `

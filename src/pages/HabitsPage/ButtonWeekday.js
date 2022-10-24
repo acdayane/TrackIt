@@ -27,7 +27,7 @@ export default function ButtonWeekday({ index, day, daysSelected, setDaysSelecte
 
     return (
         <Weekday isSelected={selected} >
-            <button onClick={() => selectDay(index+1)}>{day}</button>
+            <button onClick={() => selectDay(index)}>{day}</button>
         </Weekday>
     )
 }
